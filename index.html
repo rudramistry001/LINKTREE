@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft LinkTree</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loader"></div>
+            <div class="typing-container">
+                <div class="minecraft-text">LOADING WORLD...</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="content">
+        <div class="minecraft-frame">
+            <div class="profile-card">
+                <div class="profile-image">
+                    <img src="../profile.jpg" alt="Profile Picture">
+                </div>
+                <h1 class="minecraft-text">Rudra Mistry</h1>
+                <p class="bio minecraft-text">Full Stack Developer</p>
+            </div>
+            
+            <div class="links-container">
+                <a href="https://instagram.com/rudramistry_" class="minecraft-button" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                
+                <a href="https://facebook.com/rudramistry_" class="minecraft-button" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/rudra-mistry-1214a22b8/" class="minecraft-button" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                
+                <a href="https://github.com/rudramistry001" class="minecraft-button" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                
+                <a href="https://leetcode.com/u/mistryrudra/" class="minecraft-button" target="_blank">
+                    <i class="fas fa-code"></i>
+                    <span>LeetCode</span>
+                </a>
+
+                <a href="https://www.reddit.com/user/rudramistry001/" class="minecraft-button" target="_blank">
+                    <i class="fab fa-reddit"></i>
+                    <span>Reddit</span>
+                </a>
+            </div>
+        </div>
+        <div class="minecraft-footer">
+            <p class="minecraft-text">© 2025 | Built with <span class="heart">❤</span> in Minecraft by Rudra</p>
+        </div>
+    </div>
+    <script src="minecraft.js"></script>
+</body>
+</html> 

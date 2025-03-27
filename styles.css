@@ -1,0 +1,327 @@
+/* Minecraft Theme CSS */
+:root {
+    --minecraft-green: #5f9a55;
+    --minecraft-brown: #825432;
+    --minecraft-stone: #7a7a7a;
+    --minecraft-dirt: #866043;
+    --minecraft-darkbrown: #593d29;
+    --minecraft-black: #1d1c1c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    min-height: 100vh;
+    background-color: var(--minecraft-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    overflow-x: hidden;
+    background-image: url('https://i.imgur.com/mq2cWTO.png');
+    background-size: 100px;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.minecraft-text {
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #000;
+}
+
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--minecraft-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.minecraft-text {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 30px;
+    background-color: #505050;
+    border: 4px solid #000;
+    position: relative;
+    margin: 0 auto;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--minecraft-green);
+    transition: width 3s linear;
+}
+
+.loader {
+    width: 80px;
+    height: 80px;
+    background-image: url('https://i.imgur.com/dTGC4Af.png');
+    background-size: cover;
+    margin: 0 auto 20px;
+    animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Main Container */
+.container {
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+    display: none;
+}
+
+.minecraft-frame {
+    background-color: var(--minecraft-dirt);
+    border: 8px solid transparent;
+    border-image: url('https://i.imgur.com/8SLdbz4.png') 8 repeat;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Profile Card */
+.profile-card {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 4px solid #000;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 0 #000;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.profile-card:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://i.imgur.com/I5c6Dhn.png');
+    background-size: 32px;
+    opacity: 0.1;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.profile-image {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+    border-radius: 0;
+    overflow: hidden;
+    border: 4px solid #000;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+
+.profile-card h1 {
+    font-size: 42px;
+    margin-bottom: 5px;
+}
+
+.bio {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #FFFF55;
+}
+
+/* Links Container */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Minecraft Button */
+.minecraft-button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 16px;
+    background-color: var(--minecraft-green);
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    border: 4px solid #000;
+    transition: all 0.1s ease;
+    position: relative;
+    text-transform: uppercase;
+    overflow: hidden;
+    box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.minecraft-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://i.imgur.com/I5c6Dhn.png');
+    background-size: 32px;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.minecraft-button:hover {
+    transform: translateY(-4px);
+    background-color: #7fba75;
+    box-shadow: 0 4px 0 #000;
+}
+
+.minecraft-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.minecraft-button i {
+    font-size: 24px;
+    z-index: 1;
+}
+
+.minecraft-button span {
+    z-index: 1;
+}
+
+/* Footer */
+.minecraft-footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 18px;
+    color: #ABABAB;
+}
+
+.heart {
+    color: #FF5555;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Block animations */
+@keyframes blockAppear {
+    0% { 
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .minecraft-frame {
+        padding: 15px;
+    }
+    
+    .profile-card h1 {
+        font-size: 36px;
+    }
+    
+    .bio {
+        font-size: 20px;
+    }
+    
+    .minecraft-button {
+        font-size: 20px;
+    }
+    
+    .progress-bar {
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .minecraft-frame {
+        padding: 10px;
+        border-width: 6px;
+    }
+    
+    .profile-card h1 {
+        font-size: 32px;
+    }
+    
+    .bio {
+        font-size: 18px;
+    }
+    
+    .minecraft-button {
+        font-size: 18px;
+        padding: 10px 12px;
+    }
+    
+    .progress-bar {
+        width: 200px;
+    }
+    
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+} 
