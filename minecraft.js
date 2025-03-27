@@ -1,106 +1,131 @@
 // Minecraft Theme JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    // Three.js Background Animation
+    // Check for WebGL support
+    let isWebGLAvailable = false;
     try {
-        const canvas = document.getElementById('bg-canvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-        
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        
-        // Create cube particles (like Minecraft blocks)
-        const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-        const cubes = [];
-        const cubeCount = 80;
-        
-        // Different Minecraft-like colors
-        const colors = [
-            0x5f9a55, // Green (grass)
-            0x825432, // Brown (wood)
-            0x7a7a7a, // Stone
-            0x866043, // Dirt
-            0x5989d8, // Blue (water)
-            0xb5a76c  // Sand
-        ];
-        
-        // Create and add cubes to scene
-        for (let i = 0; i < cubeCount; i++) {
-            const material = new THREE.MeshBasicMaterial({ 
-                color: colors[Math.floor(Math.random() * colors.length)],
-                wireframe: Math.random() > 0.7 // Some cubes are wireframe
-            });
+        const canvas = document.createElement('canvas');
+        isWebGLAvailable = !!(window.WebGLRenderingContext && 
+            (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+    } catch(e) {
+        isWebGLAvailable = false;
+    }
+    
+    // Three.js Background Animation
+    if (isWebGLAvailable && typeof THREE !== 'undefined') {
+        try {
+            const canvas = document.getElementById('bg-canvas');
+            if (!canvas) throw new Error('Canvas element not found');
             
-            const cube = new THREE.Mesh(cubeGeometry, material);
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             
-            // Position cubes randomly in space
-            cube.position.x = (Math.random() - 0.5) * 20;
-            cube.position.y = (Math.random() - 0.5) * 20;
-            cube.position.z = (Math.random() - 0.5) * 20;
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
             
-            // Random rotation
-            cube.rotation.x = Math.random() * Math.PI;
-            cube.rotation.y = Math.random() * Math.PI;
-            
-            // Random speed properties
-            cube.speed = {
-                rotation: (Math.random() * 0.01) + 0.001,
-                position: (Math.random() * 0.01) + 0.001
-            };
-            
-            scene.add(cube);
-            cubes.push(cube);
-        }
-        
-        camera.position.z = 5;
-        
-        // Mouse interaction
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-        
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-        
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            // Smooth camera movement towards mouse position
-            targetX = mouseX * 0.5;
-            targetY = mouseY * 0.5;
-            camera.position.x += (targetX - camera.position.x) * 0.05;
-            camera.position.y += (targetY - camera.position.y) * 0.05;
-            camera.lookAt(0, 0, 0);
-            
-            // Animate cubes
-            cubes.forEach(cube => {
-                cube.rotation.x += cube.speed.rotation;
-                cube.rotation.y += cube.speed.rotation;
-                
-                // Slight bobbing motion
-                cube.position.y += Math.sin(Date.now() * cube.speed.position) * 0.002;
-            });
-            
-            renderer.render(scene, camera);
-        }
-        
-        animate();
-        
-        // Handle resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    } catch (error) {
-        console.error('Three.js initialization failed:', error);
-        // Fallback to static background
-        document.body.style.background = 'url("https://i.imgur.com/mq2cWTO.png")';
+            renderer.setPixelRatio(window.devicePixelRatio);
+            
+            // Create cube particles (like Minecraft blocks)
+            const cubeGeometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
+            const cubes = [];
+            const cubeCount = 100; // More cubes for better visibility
+            
+            // Different Minecraft-like colors
+            const colors = [
+                0x5f9a55, // Green (grass)
+                0x825432, // Brown (wood)
+                0x7a7a7a, // Stone
+                0x866043, // Dirt
+                0x5989d8, // Blue (water)
+                0xb5a76c, // Sand
+                0xff0000, // Red (redstone)
+                0xd5d5d5, // Light gray (iron)
+                0xdbc148, // Gold
+                0x4a80ff  // Diamond
+            ];
+            
+            // Create and add cubes to scene
+            for (let i = 0; i < cubeCount; i++) {
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    wireframe: Math.random() > 0.8 // Fewer wireframes for better visibility
+                });
+                
+                const cube = new THREE.Mesh(cubeGeometry, material);
+                
+                // Position cubes randomly in space
+                cube.position.x = (Math.random() - 0.5) * 25;
+                cube.position.y = (Math.random() - 0.5) * 25;
+                cube.position.z = (Math.random() - 0.5) * 25;
+                
+                // Random rotation
+                cube.rotation.x = Math.random() * Math.PI;
+                cube.rotation.y = Math.random() * Math.PI;
+                
+                // Random speed properties
+                cube.speed = {
+                    rotation: (Math.random() * 0.01) + 0.002,
+                    position: (Math.random() * 0.01) + 0.002
+                };
+                
+                scene.add(cube);
+                cubes.push(cube);
+            }
+            
+            camera.position.z = 8; // Move camera back for better view
+            
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Smooth camera movement towards mouse position
+                targetX = mouseX * 0.5;
+                targetY = mouseY * 0.5;
+                camera.position.x += (targetX - camera.position.x) * 0.05;
+                camera.position.y += (targetY - camera.position.y) * 0.05;
+                camera.lookAt(0, 0, 0);
+                
+                // Animate cubes
+                cubes.forEach(cube => {
+                    cube.rotation.x += cube.speed.rotation;
+                    cube.rotation.y += cube.speed.rotation;
+                    
+                    // Slight bobbing motion
+                    cube.position.y += Math.sin(Date.now() * cube.speed.position) * 0.002;
+                });
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        } catch (error) {
+            console.error('Three.js initialization failed:', error);
+            // Fallback to static background - hide canvas
+            const canvas = document.getElementById('bg-canvas');
+            if (canvas) canvas.style.display = 'none';
+        }
+    } else {
+        console.warn('WebGL or Three.js is not available, using fallback background');
+        // Hide canvas since we won't be using it
+        const canvas = document.getElementById('bg-canvas');
+        if (canvas) canvas.style.display = 'none';
     }
 
     // Loading screen animation
@@ -124,8 +149,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Animate elements appearing
                     animateElements();
                     
-                    // Apply Minecraft textures
-                    applyMinecraftTextures();
+                    // Apply additional styles via JavaScript as a fallback
+                    const styleLoaded = document.querySelector('body').classList.contains('minecraft-theme');
+                    if (!styleLoaded) {
+                        applyFallbackStyles();
+                    }
                 }, 300);
             }, 300);
         } else {
@@ -135,49 +163,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 100);
     
-    // Function to apply Minecraft textures
-    function applyMinecraftTextures() {
+    // Function to apply fallback styles directly via JavaScript
+    function applyFallbackStyles() {
+        // Set basic styling
+        document.body.style.backgroundColor = '#1d1c1c';
+        document.body.style.fontFamily = "'VT323', monospace";
+        document.body.style.color = '#fff';
+        
+        // Add Minecraft theme class
+        document.body.classList.add('minecraft-theme');
+        
         // Make sure profile image is visible
         const profileImg = document.querySelector('.profile-image img');
         if (profileImg) {
             // Force reload the image with a cache buster
             const originalSrc = profileImg.src;
-            profileImg.src = originalSrc + '?v=' + new Date().getTime();
-        }
-        
-        // Apply Minecraft texture to the frame
-        const frame = document.querySelector('.minecraft-frame');
-        if (frame) {
-            frame.style.backgroundColor = '#866043';
-            frame.style.borderWidth = '8px';
-            frame.style.borderStyle = 'solid';
-            frame.style.borderTopColor = '#7d5930';
-            frame.style.borderLeftColor = '#7d5930';
-            frame.style.borderBottomColor = '#3d2911';
-            frame.style.borderRightColor = '#3d2911';
-            frame.style.boxShadow = '0 0 0 4px #000';
-        }
-        
-        // Make buttons more Minecraft-like
-        const buttons = document.querySelectorAll('.minecraft-button');
-        buttons.forEach(button => {
-            button.style.backgroundColor = '#5f9a55';
-            button.style.color = 'white';
-            button.style.borderColor = '#000';
-            button.style.boxShadow = 'inset 0 4px 0 rgba(255, 255, 255, 0.3), inset -4px -4px 0 rgba(0, 0, 0, 0.3)';
-            
-            // Add text shadow to button text
-            const span = button.querySelector('span');
-            if (span) {
-                span.style.textShadow = '2px 2px 0 #000';
+            if (originalSrc && !originalSrc.includes('?v=')) {
+                profileImg.src = originalSrc + '?v=' + Date.now();
             }
-            
-            // Add text shadow to button icon
-            const icon = button.querySelector('i');
-            if (icon) {
-                icon.style.textShadow = '2px 2px 0 #000';
-            }
-        });
+        }
     }
     
     // Block-by-block animation
