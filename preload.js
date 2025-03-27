@@ -18,7 +18,8 @@ window.addEventListener('DOMContentLoaded', function() {
         const profileContainer = document.querySelector('.profile-image');
         if (profileContainer) {
             profileContainer.style.backgroundColor = '#555';
-            // Add a placeholder icon or text if needed
+            // Create a placeholder icon for profile
+            profileContainer.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:#fff;text-shadow:2px 2px 0 #000;"><i class="fas fa-user"></i></div>';
         }
     };
     
@@ -37,8 +38,8 @@ window.addEventListener('DOMContentLoaded', function() {
         document.body.style.fontFamily = "'VT323', monospace";
         document.body.style.color = '#fff';
         
-        // Create dirt texture pattern with Canvas
-        createAndApplyTexture();
+        // Apply CSS grid patterns
+        applyGridPatterns();
         
         // Fix button styling
         const buttons = document.querySelectorAll('.minecraft-button');
@@ -57,8 +58,9 @@ window.addEventListener('DOMContentLoaded', function() {
             button.style.position = 'relative';
             button.style.overflow = 'hidden';
             
-            // Add button texture
-            button.style.position = 'relative';
+            // Apply grid pattern to buttons
+            button.style.backgroundImage = 'linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px)';
+            button.style.backgroundSize = '8px 8px';
             
             // Add text shadow to all text within buttons
             const allTextElements = button.querySelectorAll('*');
@@ -81,6 +83,10 @@ window.addEventListener('DOMContentLoaded', function() {
             frame.style.borderRightColor = '#3d2911';
             frame.style.padding = '20px';
             frame.style.boxShadow = '0 0 0 4px #000';
+            
+            // Apply grid pattern
+            frame.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)';
+            frame.style.backgroundSize = '16px 16px';
         }
         
         // Fix profile card styling
@@ -111,74 +117,11 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Create texture using Canvas and apply it
-    function createAndApplyTexture() {
-        try {
-            // Create a canvas to generate the texture
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Size of the texture cell
-            canvas.width = 32;
-            canvas.height = 32;
-            
-            // Base color (dirt)
-            ctx.fillStyle = '#866043';
-            ctx.fillRect(0, 0, 32, 32);
-            
-            // Add noise pattern
-            for (let i = 0; i < 100; i++) {
-                const x = Math.floor(Math.random() * 32);
-                const y = Math.floor(Math.random() * 32);
-                const size = Math.floor(Math.random() * 3) + 1;
-                
-                // Random darker/lighter spots
-                const shade = Math.random();
-                if (shade > 0.5) {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-                } else {
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-                }
-                
-                ctx.fillRect(x, y, size, size);
-            }
-            
-            // Convert canvas to data URL
-            const dataURL = canvas.toDataURL();
-            
-            // Apply to body background
-            document.body.style.backgroundImage = `url(${dataURL})`;
-            document.body.style.backgroundSize = '32px';
-            document.body.style.backgroundRepeat = 'repeat';
-            
-            // Apply to buttons
-            const buttons = document.querySelectorAll('.minecraft-button');
-            buttons.forEach(button => {
-                // Create a pseudo-element with the texture
-                button.style.position = 'relative';
-                
-                const buttonTexture = document.createElement('div');
-                buttonTexture.style.position = 'absolute';
-                buttonTexture.style.top = '0';
-                buttonTexture.style.left = '0';
-                buttonTexture.style.width = '100%';
-                buttonTexture.style.height = '100%';
-                buttonTexture.style.backgroundImage = `url(${dataURL})`;
-                buttonTexture.style.backgroundSize = '32px';
-                buttonTexture.style.opacity = '0.3';
-                buttonTexture.style.pointerEvents = 'none';
-                
-                // Insert as first child
-                if (button.firstChild) {
-                    button.insertBefore(buttonTexture, button.firstChild);
-                } else {
-                    button.appendChild(buttonTexture);
-                }
-            });
-            
-            console.log('Textures created and applied');
-        } catch (error) {
-            console.error('Error creating textures:', error);
-        }
+    // Apply grid patterns to different elements
+    function applyGridPatterns() {
+        // Apply simplified dark background pattern to body
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.backgroundImage = 'linear-gradient(rgba(0, 0, 0, 0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.8) 1px, transparent 1px)';
+        document.body.style.backgroundSize = '24px 24px';
     }
 }); 

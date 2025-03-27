@@ -17,16 +17,18 @@
 body {
     font-family: 'VT323', monospace;
     min-height: 100vh;
-    background-color: #1d1c1c;
+    background-color: #121212;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
     position: relative;
     overflow-x: hidden;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGPSURBVFiF1ZexSsNQFIa/I1gcOjiYoUsEB8HFwUGkk5ODq5OLg4/gS/gIRQex4BoQh1Jx0M3VxaFQEAQnMRQLNjTnOiQ3JjVtbmObfFMg9+R+/3/vubmXgM90G2ZcrQElYALoi/D5AlaAJdcLvTSF7wJ14KTL+hPgC+gYLgA5oEBnL9SBssuFH8UBnAcu/3qAvAfUnb9FYMXmgJcWfA18GIXn0+xY9IC8/UDr+ZxRdDvUr/SBkq0BW0YRb8BkJ3FHm4avYdcLvVYP9AOnwT5DpP1d4MXmgLWBTYt42sBwUfprwJVRTIl+MhHVJiJlKpYc0Gc8ZBIRJOqqvnzDZoDfpPATI/88/ZfRSeJlkrwH5OVUkrxmM3Vgr8M+e4arFjdQ7LDPmuGqm4eQXUMrRh60xH0DS9K4ZOS9ljgDvNvqgRVDex1nDA1aK+JvAiZDCnG5+6jFbIwJq8hCJsfAxYIkLH0dNbLe0O7oZeDYoP80/OfDU4bPQgPdU3YB08CYJexBtL5LQEnyXwKm7QvQGO0JKnEkhAAAAABJRU5ErkJggg==");
-    background-size: 32px;
-    background-repeat: repeat;
+    /* Simplified background */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.8) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.8) 1px, transparent 1px);
+    background-size: 24px 24px;
     image-rendering: pixelated;
 }
 
@@ -90,10 +92,30 @@ body {
 .loader {
     width: 80px;
     height: 80px;
-    background-image: url('https://i.imgur.com/dTGC4Af.png');
-    background-size: cover;
     margin: 0 auto 20px;
+    border: 5px solid #333;
+    border-top: 5px solid #5f9a55;
+    border-radius: 0;
     animation: spin 2s infinite linear;
+    position: relative;
+    box-shadow: inset 0 0 0 5px #000;
+    background-color: #222;
+}
+
+.loader::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(45deg, #000 25%, transparent 25%),
+                      linear-gradient(-45deg, #000 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #000 75%),
+                      linear-gradient(-45deg, transparent 75%, #000 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.2;
 }
 
 @keyframes spin {
@@ -121,19 +143,27 @@ body {
     position: relative;
     box-shadow: 0 0 0 4px #000;
     image-rendering: pixelated;
+    background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.1) 15%, transparent 16%),
+        radial-gradient(rgba(0, 0, 0, 0.1) 15%, transparent 16%);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
 }
 
-.minecraft-frame::before {
+.minecraft-frame::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGPSURBVFiF1ZexSsNQFIa/I1gcOjiYoUsEB8HFwUGkk5ODq5OLg4/gS/gIRQex4BoQh1Jx0M3VxaFQEAQnMRQLNjTnOiQ3JjVtbmObfFMg9+R+/3/vubmXgM90G2ZcrQElYALoi/D5AlaAJdcLvTSF7wJ14KTL+hPgC+gYLgA5oEBnL9SBssuFH8UBnAcu/3qAvAfUnb9FYMXmgJcWfA18GIXn0+xY9IC8/UDr+ZxRdDvUr/SBkq0BW0YRb8BkJ3FHm4avYdcLvVYP9AOnwT5DpP1d4MXmgLWBTYt42sBwUfprwJVRTIl+MhHVJiJlKpYc0Gc8ZBIRJOqqvnzDZoDfpPATI/88/ZfRSeJlkrwH5OVUkrxmM3Vgr8M+e4arFjdQ7LDPmuGqm4eQXUMrRh60xH0DS9K4ZOS9ljgDvNvqgRVDex1nDA1aK+JvAiZDCnG5+6jFbIwJq8hCJsfAxYIkLH0dNbLe0O7oZeDYoP80/OfDU4bPQgPdU3YB08CYJexBtL5LQEnyXwKm7QvQGO0JKnEkhAAAAABJRU5ErkJggg==");
-    background-size: 32px;
-    opacity: 0.1;
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.05) 15%, transparent 16%),
+        radial-gradient(rgba(255, 255, 255, 0.05) 15%, transparent 16%);
+    background-size: 16px 16px;
+    background-position: 8px 8px, 0 0;
     pointer-events: none;
+    z-index: 1;
 }
 
 /* Profile Card */
@@ -145,6 +175,26 @@ body {
     border: 4px solid #000;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .profile-card:hover {
@@ -160,8 +210,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://i.imgur.com/I5c6Dhn.png');
-    background-size: 32px;
+    background-image: 
+        linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%);
+    background-size: 16px 16px;
     opacity: 0.1;
     z-index: 0;
     pointer-events: none;
@@ -226,19 +280,12 @@ body {
     image-rendering: pixelated;
     margin-bottom: 12px;
     cursor: pointer;
-}
-
-.minecraft-button:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGPSURBVFiF1ZexSsNQFIa/I1gcOjiYoUsEB8HFwUGkk5ODq5OLg4/gS/gIRQex4BoQh1Jx0M3VxaFQEAQnMRQLNjTnOiQ3JjVtbmObfFMg9+R+/3/vubmXgM90G2ZcrQElYALoi/D5AlaAJdcLvTSF7wJ14KTL+hPgC+gYLgA5oEBnL9SBssuFH8UBnAcu/3qAvAfUnb9FYMXmgJcWfA18GIXn0+xY9IC8/UDr+ZxRdDvUr/SBkq0BW0YRb8BkJ3FHm4avYdcLvVYP9AOnwT5DpP1d4MXmgLWBTYt42sBwUfprwJVRTIl+MhHVJiJlKpYc0Gc8ZBIRJOqqvnzDZoDfpPATI/88/ZfRSeJlkrwH5OVUkrxmM3Vgr8M+e4arFjdQ7LDPmuGqm4eQXUMrRh60xH0DS9K4ZOS9ljgDvNvqgRVDex1nDA1aK+JvAiZDCnG5+6jFbIwJq8hCJsfAxYIkLH0dNbLe0O7oZeDYoP80/OfDU4bPQgPdU3YB08CYJexBtL5LQEnyXwKm7QvQGO0JKnEkhAAAAABJRU5ErkJggg==");
-    background-size: 32px;
-    opacity: 0.3;
-    z-index: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                      linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 2px),
+                      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 2px);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 0, 4px 4px, 4px 4px;
 }
 
 .minecraft-button i,
@@ -346,4 +393,30 @@ body {
         width: 100px;
         height: 100px;
     }
+}
+
+/* Enhanced Minecraft Theme */
+.minecraft-theme {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.minecraft-theme::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Simpler, darker pattern */
+    background-color: rgba(0, 0, 0, 0.4);
+    background-image: 
+        radial-gradient(rgba(40, 40, 40, 0.4) 2px, transparent 3px);
+    background-size: 64px 64px;
+    pointer-events: none;
+    z-index: -1;
 } 
