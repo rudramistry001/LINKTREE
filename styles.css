@@ -17,15 +17,17 @@
 body {
     font-family: 'VT323', monospace;
     min-height: 100vh;
-    background-color: var(--minecraft-black);
+    background-color: #1d1c1c;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
     position: relative;
     overflow-x: hidden;
-    background-image: url('https://i.imgur.com/mq2cWTO.png');
-    background-size: 100px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGPSURBVFiF1ZexSsNQFIa/I1gcOjiYoUsEB8HFwUGkk5ODq5OLg4/gS/gIRQex4BoQh1Jx0M3VxaFQEAQnMRQLNjTnOiQ3JjVtbmObfFMg9+R+/3/vubmXgM90G2ZcrQElYALoi/D5AlaAJdcLvTSF7wJ14KTL+hPgC+gYLgA5oEBnL9SBssuFH8UBnAcu/3qAvAfUnb9FYMXmgJcWfA18GIXn0+xY9IC8/UDr+ZxRdDvUr/SBkq0BW0YRb8BkJ3FHm4avYdcLvVYP9AOnwT5DpP1d4MXmgLWBTYt42sBwUfprwJVRTIl+MhHVJiJlKpYc0Gc8ZBIRJOqqvnzDZoDfpPATI/88/ZfRSeJlkrwH5OVUkrxmM3Vgr8M+e4arFjdQ7LDPmuGqm4eQXUMrRh60xH0DS9K4ZOS9ljgDvNvqgRVDex1nDA1aK+JvAiZDCnG5+6jFbIwJq8hCJsfAxYIkLH0dNbLe0O7oZeDYoP80/OfDU4bPQgPdU3YB08CYJexBtL5LQEnyXwKm7QvQGO0JKnEkhAAAAABJRU5ErkJggg==");
+    background-size: 32px;
+    background-repeat: repeat;
+    image-rendering: pixelated;
 }
 
 #bg-canvas {
@@ -109,12 +111,29 @@ body {
 }
 
 .minecraft-frame {
-    background-color: var(--minecraft-dirt);
-    border: 8px solid transparent;
-    border-image: url('https://i.imgur.com/8SLdbz4.png') 8 repeat;
+    background-color: #866043; /* Dirt color */
+    border: 8px solid #5b4121;
+    border-top-color: #7d5930;
+    border-left-color: #7d5930;
+    border-bottom-color: #3d2911;
+    border-right-color: #3d2911;
     padding: 20px;
     position: relative;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 4px #000;
+    image-rendering: pixelated;
+}
+
+.minecraft-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGPSURBVFiF1ZexSsNQFIa/I1gcOjiYoUsEB8HFwUGkk5ODq5OLg4/gS/gIRQex4BoQh1Jx0M3VxaFQEAQnMRQLNjTnOiQ3JjVtbmObfFMg9+R+/3/vubmXgM90G2ZcrQElYALoi/D5AlaAJdcLvTSF7wJ14KTL+hPgC+gYLgA5oEBnL9SBssuFH8UBnAcu/3qAvAfUnb9FYMXmgJcWfA18GIXn0+xY9IC8/UDr+ZxRdDvUr/SBkq0BW0YRb8BkJ3FHm4avYdcLvVYP9AOnwT5DpP1d4MXmgLWBTYt42sBwUfprwJVRTIl+MhHVJiJlKpYc0Gc8ZBIRJOqqvnzDZoDfpPATI/88/ZfRSeJlkrwH5OVUkrxmM3Vgr8M+e4arFjdQ7LDPmuGqm4eQXUMrRh60xH0DS9K4ZOS9ljgDvNvqgRVDex1nDA1aK+JvAiZDCnG5+6jFbIwJq8hCJsfAxYIkLH0dNbLe0O7oZeDYoP80/OfDU4bPQgPdU3YB08CYJexBtL5LQEnyXwKm7QvQGO0JKnEkhAAAAABJRU5ErkJggg==");
+    background-size: 32px;
+    opacity: 0.1;
+    pointer-events: none;
 }
 
 /* Profile Card */
@@ -194,7 +213,7 @@ body {
     align-items: center;
     gap: 15px;
     padding: 12px 16px;
-    background-color: var(--minecraft-green);
+    background-color: #5f9a55; /* Minecraft green */
     color: white;
     text-decoration: none;
     font-size: 24px;
@@ -203,7 +222,10 @@ body {
     position: relative;
     text-transform: uppercase;
     overflow: hidden;
-    box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.3), inset -4px -4px 0 rgba(0, 0, 0, 0.3);
+    image-rendering: pixelated;
+    margin-bottom: 12px;
+    cursor: pointer;
 }
 
 .minecraft-button:before {
@@ -213,30 +235,30 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://i.imgur.com/I5c6Dhn.png');
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGPSURBVFiF1ZexSsNQFIa/I1gcOjiYoUsEB8HFwUGkk5ODq5OLg4/gS/gIRQex4BoQh1Jx0M3VxaFQEAQnMRQLNjTnOiQ3JjVtbmObfFMg9+R+/3/vubmXgM90G2ZcrQElYALoi/D5AlaAJdcLvTSF7wJ14KTL+hPgC+gYLgA5oEBnL9SBssuFH8UBnAcu/3qAvAfUnb9FYMXmgJcWfA18GIXn0+xY9IC8/UDr+ZxRdDvUr/SBkq0BW0YRb8BkJ3FHm4avYdcLvVYP9AOnwT5DpP1d4MXmgLWBTYt42sBwUfprwJVRTIl+MhHVJiJlKpYc0Gc8ZBIRJOqqvnzDZoDfpPATI/88/ZfRSeJlkrwH5OVUkrxmM3Vgr8M+e4arFjdQ7LDPmuGqm4eQXUMrRh60xH0DS9K4ZOS9ljgDvNvqgRVDex1nDA1aK+JvAiZDCnG5+6jFbIwJq8hCJsfAxYIkLH0dNbLe0O7oZeDYoP80/OfDU4bPQgPdU3YB08CYJexBtL5LQEnyXwKm7QvQGO0JKnEkhAAAAABJRU5ErkJggg==");
     background-size: 32px;
     opacity: 0.3;
     z-index: 0;
 }
 
+.minecraft-button i,
+.minecraft-button span {
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 0px #000;
+}
+
 .minecraft-button:hover {
     transform: translateY(-4px);
     background-color: #7fba75;
-    box-shadow: 0 4px 0 #000;
+    box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.3), inset -4px -4px 0 rgba(0, 0, 0, 0.3), 0 4px 0 #000;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
 }
 
 .minecraft-button:active {
     transform: translateY(0);
-    box-shadow: none;
-}
-
-.minecraft-button i {
-    font-size: 24px;
-    z-index: 1;
-}
-
-.minecraft-button span {
-    z-index: 1;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3), inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+    background-color: #4e8046;
 }
 
 /* Footer */

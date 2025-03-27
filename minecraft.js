@@ -123,6 +123,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Animate elements appearing
                     animateElements();
+                    
+                    // Apply Minecraft textures
+                    applyMinecraftTextures();
                 }, 300);
             }, 300);
         } else {
@@ -131,6 +134,51 @@ document.addEventListener('DOMContentLoaded', function() {
             progressFill.style.width = width + '%';
         }
     }, 100);
+    
+    // Function to apply Minecraft textures
+    function applyMinecraftTextures() {
+        // Make sure profile image is visible
+        const profileImg = document.querySelector('.profile-image img');
+        if (profileImg) {
+            // Force reload the image with a cache buster
+            const originalSrc = profileImg.src;
+            profileImg.src = originalSrc + '?v=' + new Date().getTime();
+        }
+        
+        // Apply Minecraft texture to the frame
+        const frame = document.querySelector('.minecraft-frame');
+        if (frame) {
+            frame.style.backgroundColor = '#866043';
+            frame.style.borderWidth = '8px';
+            frame.style.borderStyle = 'solid';
+            frame.style.borderTopColor = '#7d5930';
+            frame.style.borderLeftColor = '#7d5930';
+            frame.style.borderBottomColor = '#3d2911';
+            frame.style.borderRightColor = '#3d2911';
+            frame.style.boxShadow = '0 0 0 4px #000';
+        }
+        
+        // Make buttons more Minecraft-like
+        const buttons = document.querySelectorAll('.minecraft-button');
+        buttons.forEach(button => {
+            button.style.backgroundColor = '#5f9a55';
+            button.style.color = 'white';
+            button.style.borderColor = '#000';
+            button.style.boxShadow = 'inset 0 4px 0 rgba(255, 255, 255, 0.3), inset -4px -4px 0 rgba(0, 0, 0, 0.3)';
+            
+            // Add text shadow to button text
+            const span = button.querySelector('span');
+            if (span) {
+                span.style.textShadow = '2px 2px 0 #000';
+            }
+            
+            // Add text shadow to button icon
+            const icon = button.querySelector('i');
+            if (icon) {
+                icon.style.textShadow = '2px 2px 0 #000';
+            }
+        });
+    }
     
     // Block-by-block animation
     function animateElements() {
