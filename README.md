@@ -25,6 +25,8 @@ You can customize this LinkTree by:
 - Adjusting animations and effects in `minecraft.js`
 
 ## Assets Used
+![image](https://github.com/user-attachments/assets/6ce6e3b2-3153-4757-8074-9ca715c9338a)
+
 
 - Minecraft-style font: VT323 from Google Fonts
 - Textures and images from Minecraft
